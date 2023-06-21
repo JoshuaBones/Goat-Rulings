@@ -42,7 +42,7 @@ watch(search, async (newSearch, oldSearch) => {
 
 <template>
   <main>
-    <div><input :value="search" @input="onInput" placeholder="Search a Word" type="text" @change="fetchMatchingCardNames" /><button @click="fetchMatchingCardNames" type="button">Search</button></div>
+    <div><input :value="search" @input="onInput" placeholder="Search a Card" type="text" @change="fetchMatchingCardNames" /><button @click="fetchMatchingCardNames" type="button">Search</button></div>
     
     <li v-if="namesOrRulings" v-for="(item, index) in searchResults" @click="showRuling(item); toggleNamesOrRulings();">
       {{ item }}
