@@ -7,7 +7,7 @@ const props = defineProps({
 
 <template>
   <br />
-  <button @click="$emit('goBack')">Back</button>
+  <div class="center"><button @click="$emit('goBack')">Back</button></div>
   <h3>{{ name }}</h3>
   <div v-html="msg"></div>
 </template>

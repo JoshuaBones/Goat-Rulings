@@ -14,8 +14,11 @@ links = []
 for i in range(1,9):
     links.append(firstLink + str(i) + lastLink)
 
+print('starting')
+
 rulings = {}
 for link in links:
+    print('retrieving data: ' + link)
     html_text = requests.get(link).text
     soup = BeautifulSoup(html_text, 'html.parser')
 
@@ -35,6 +38,8 @@ for link in links:
                 rulings[currKey] = rulings.get(currKey, '') + str(ruling_elements)
 
         ruling_elements = ruling_elements.next_sibling
+print('finished retrieving\nwriting to file')
     
 with open("./src/rulings.json", "w") as outfile:
     json.dump(rulings, outfile)
+print('finished successfully')

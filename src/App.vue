@@ -42,7 +42,7 @@ watch(search, async (newSearch, oldSearch) => {
 
 <template>
   <main>
-    <div>
+    <div class="center">
       <input :value="search" @input="onInput" placeholder="Search a Card" type="text" @change="fetchMatchingCardNames" />
       <button @click="fetchMatchingCardNames" type="button">Search</button>
     </div>
