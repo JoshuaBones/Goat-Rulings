@@ -1,6 +1,6 @@
 # goat-rulings
 
-This site is meant to streamline the process of looking up a ruling for the Goat format in Yu-Gi-Oh!. Try looking up a ruling on https://www.goatformat.com/ by going to "How to Play" -> "Rules & Policies" -> "Individual Card Rulings", select the appropriate page and find the card you're looking for. Come back here and try the same thing.
+This site is meant to streamline the process of looking up a ruling for Yu-Gi-Oh!'s Goat format'. Try finding the rulings for "Thousand-Eyes Restrict" here: https://www.goatformat.com/indivrulings.html. Come back here and try the same thing.
 
 ## Planned features
 

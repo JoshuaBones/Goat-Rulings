@@ -42,7 +42,10 @@ watch(search, async (newSearch, oldSearch) => {
 
 <template>
   <main>
-    <div><input :value="search" @input="onInput" placeholder="Search a Card" type="text" @change="fetchMatchingCardNames" /><button @click="fetchMatchingCardNames" type="button">Search</button></div>
+    <div>
+      <input :value="search" @input="onInput" placeholder="Search a Card" type="text" @change="fetchMatchingCardNames" />
+      <button @click="fetchMatchingCardNames" type="button">Search</button>
+    </div>
     
     <li v-if="namesOrRulings" v-for="(item, index) in searchResults" @click="showRuling(item); toggleNamesOrRulings();">
       {{ item }}
@@ -65,7 +68,7 @@ header {
   header {
     display: flex;
     place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    /*padding-right: calc(var(--section-gap) / 2);*/
   }
 
   .logo {
