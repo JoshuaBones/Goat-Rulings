@@ -2,3 +2,19 @@
     text-align: center;
     margin: auto;
 }
+
+.centerWithLeftText {
+    text-align: left;
+    margin: auto;
+}
+
+/*https://stackoverflow.com/questions/1269589/css-center-block-but-align-contents-to-the-left*/
+/*keeps card names centered and left-justified*/
+.text-center-outer {
+    text-align: center;
+}
+
+.text-center-inner {
+    display: inline-block;
+    text-align: left;
+}
