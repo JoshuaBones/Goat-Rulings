@@ -10,5 +10,7 @@ Better formatting for desktop
 
 ## How it was made
 
-Vue.js + Vite deployed on github pages
+Vue.js + Vite deployed on github pages  
 https://vitejs.dev/guide/
+
+Data was ripped from here with python: https://www.goatformat.com/indivrulings.html
