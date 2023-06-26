@@ -1,7 +1,7 @@
 # Goat-Rulings
 
 This site is meant to streamline the process of looking up a ruling for Yu-Gi-Oh!'s Goat format. Try finding the rulings for "Thousand-Eyes Restrict" here: https://www.goatformat.com/indivrulings.html.  
-Come back and try the same thing.
+Come back and try the same thing: https://joshuabones.github.io/Goat-Rulings/
 
 ## Planned features
 
