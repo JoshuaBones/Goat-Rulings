@@ -47,9 +47,13 @@ watch(search, async (newSearch, oldSearch) => {
       <button @click="fetchMatchingCardNames" type="button">Search</button>
     </div>
     
-    <li v-if="namesOrRulings" v-for="(item, index) in searchResults" @click="showRuling(item); toggleNamesOrRulings();">
-      {{ item }}
-    </li>
+    <div v-if="namesOrRulings" class="text-center-outer">
+      <div class="text-center-inner">
+        <li v-for="(item, index) in searchResults" @click="showRuling(item); toggleNamesOrRulings();">
+          {{ item }}
+        </li>
+      </div>
+    </div>
     <RulingComp v-else="namesOrRulings" :name="name" :msg="ruling" @goBack="toggleNamesOrRulings()" />
   </main>
 </template>
