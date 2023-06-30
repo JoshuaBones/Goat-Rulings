@@ -1,27 +1,44 @@
 <script setup>
 import RulingComp from './components/Ruling.vue'
 
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import cardData from './rulings.json'
 
 const cardNames = Object.keys(cardData)
 
+const searchInputElement = ref(null)
+const chkAutoSearch = ref(null)
+const chkSearchType = ref("Card")//search within Name or Ruling
+
 const search = ref("")
 const searchResults = ref(null)
 
-const name = ref(null)
+const name = ref(null)//current name and ruling being shown in RulingComp
 const ruling = ref(null)
 
 const namesOrRulings = ref(true)//true to show names false for rulings
 
-async function showRuling(cardName) {
+async function populateRuling(cardName) {
   name.value = cardName
   ruling.value = cardData[cardName]
 }
 
-async function fetchMatchingCardNames() {
+function findMentions() {
+  document.getElementById("rRuling").checked = true
+  chkSearchType.value = "Ruling Mentions"
+  toggleNamesOrRulings()
+  search.value = name.value
+  //fetchMatchingData()
+}
+
+async function fetchMatchingData() {
   const s = search.value.toLowerCase()
-  searchResults.value = cardNames.filter(x => x.toLowerCase().includes(s))
+
+  if(chkSearchType.value == "Card") { //search matching card names
+    searchResults.value = cardNames.filter(x => x.toLowerCase().includes(s))
+  } else {                            //retrieve cards based on stored rulings
+    searchResults.value = cardNames.filter((key) => cardData[key].toLowerCase().includes(s))
+  }
 }
 
 function toggleNamesOrRulings() {//https://vuejs.org/tutorial/#step-6
@@ -35,26 +52,63 @@ function onInput(e) {
   search.value = e.target.value
 }
 
-watch(search, async (newSearch, oldSearch) => {
-  fetchMatchingCardNames()
+//findMentions() made both watches fire and do the same thing
+//https://stackoverflow.com/a/45853349
+watch([search, chkSearchType], async () => {
+  if(chkAutoSearch.value.checked) {
+    fetchMatchingData()
+  }
+})
+
+onMounted(() => {
+  //https://michaelnthiessen.com/set-focus-on-input-vue#:~:text=Set%20focus%20on%20page%20load
+  searchInputElement.value.focus()
 })
 </script>
 
 <template>
   <main>
-    <div class="center">
-      <input :value="search" @input="onInput" placeholder="Search a Card" type="text" @change="fetchMatchingCardNames" />
-      <button @click="fetchMatchingCardNames" type="button">Search</button>
+    
+    <div id="search" class="center">
+      <div class="margins">
+        <input type="checkbox" ref="chkAutoSearch" id="chkAutoSearch" checked>
+        <label for="chkAutoSearch">Auto</label>
+
+        <input v-model="chkSearchType" type="radio" 
+               id="rCard" 
+               value="Card" 
+               class="l-margin" 
+               checked
+        >
+        <label for="rCard">Card</label>
+        <input v-model="chkSearchType" type="radio"
+               id="rRuling" 
+               value="Ruling Mentions">
+        <label for="rRuling">Ruling Mentions</label>
+      </div>
+      <input ref="searchInputElement" 
+             id="txtInput" 
+             :value="search" 
+             @input="onInput" 
+             placeholder="Search a Card" 
+             type="text" 
+      />
+      <button @click="fetchMatchingData" type="button">Search</button>
     </div>
     
     <div v-if="namesOrRulings" class="text-center-outer">
       <div class="text-center-inner">
-        <li v-for="(item, index) in searchResults" @click="showRuling(item); toggleNamesOrRulings();">
+        <li v-for="(item, index) in searchResults" @click="populateRuling(item); toggleNamesOrRulings();">
           {{ item }}
         </li>
       </div>
     </div>
-    <RulingComp v-else="namesOrRulings" :name="name" :msg="ruling" @goBack="toggleNamesOrRulings()" />
+    <RulingComp v-else 
+                :name="name" 
+                :msg="ruling" 
+                @goBack="toggleNamesOrRulings()"
+                @findMentions="findMentions()"
+    />
   </main>
 </template>
 

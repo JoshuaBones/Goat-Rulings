@@ -18,3 +18,21 @@
     display: inline-block;
     text-align: left;
 }
+
+.mentions {
+    margin-left: 10px;
+}
+
+.l-margin {
+    margin-left: 7px;
+}
+
+.margins > * {
+    margin-right: 3px;
+}
+
+@media (min-width: 1024px) {
+    #search {
+        margin-top: 30%;
+    }
+}

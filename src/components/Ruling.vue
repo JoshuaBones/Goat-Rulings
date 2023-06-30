@@ -7,7 +7,10 @@ const props = defineProps({
 
 <template>
   <br />
-  <div class="center"><button @click="$emit('goBack')">Back</button></div>
+  <div class="center">
+    <button @click="$emit('goBack')">Back</button>
+    <button @click="$emit('findMentions')" class="l-margin">Mentions</button>
+  </div>
   <h3>{{ name }}</h3>
   <div v-html="msg"></div>
 </template>
