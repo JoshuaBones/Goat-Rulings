@@ -20,7 +20,14 @@ const namesOrRulings = ref(true)//true to show names false for rulings
 
 async function populateRuling(cardName) {
   name.value = cardName
-  ruling.value = cardData[cardName]
+
+  if(chkSearchType.value == "Ruling Mentions") {
+    //means they're looking for a specific card or text being mentioned, so highlight it
+    const re = new RegExp(search.value, "gi")
+    ruling.value = ruling.value.replaceAll(re, '<mark>$&</mark>')
+  } else {
+    ruling.value = cardData[cardName]
+  }
 }
 
 function findMentions() {
@@ -55,7 +62,7 @@ function onInput(e) {
 //findMentions() made both watches fire and do the same thing
 //https://stackoverflow.com/a/45853349
 watch([search, chkSearchType], async () => {
-  if(chkAutoSearch.value.checked) {
+  if(chkAutoSearch.value.checked && search.value != "") {
     fetchMatchingData()
   }
 })
@@ -98,7 +105,8 @@ onMounted(() => {
     
     <div v-if="namesOrRulings" class="text-center-outer">
       <div class="text-center-inner">
-        <li v-for="(item, index) in searchResults" @click="populateRuling(item); toggleNamesOrRulings();">
+        <li v-for="(item, index) in searchResults" 
+          @click="populateRuling(item); toggleNamesOrRulings();">
           {{ item }}
         </li>
       </div>

@@ -5,8 +5,8 @@ Come back and try the same thing: https://joshuabones.github.io/Goat-Rulings/
 
 ## Planned features
 
-Also show results that mention the card, not just rulings specifically for the searched card.  
-Better formatting for desktop
+Better formatting for desktop  
+Clean up code, move to more components
 
 ## How it was made
 
