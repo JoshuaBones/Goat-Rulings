@@ -18,19 +18,19 @@ const ruling = ref(null)
 
 const namesOrRulings = ref(true)//true to show names false for rulings
 
-async function populateRuling(cardName) {
+function populateRuling(cardName) {
   name.value = cardName
 
   if(chkSearchType.value == "Ruling Mentions") {
     //means they're looking for a specific card or text being mentioned, so highlight it
     const re = new RegExp(search.value, "gi")
-    ruling.value = ruling.value.replaceAll(re, '<mark>$&</mark>')
+    ruling.value = cardData[cardName].replaceAll(re, '<mark>$&</mark>')
   } else {
     ruling.value = cardData[cardName]
   }
 }
 
-function findMentions() {
+async function findMentions() {
   document.getElementById("rRuling").checked = true
   chkSearchType.value = "Ruling Mentions"
   toggleNamesOrRulings()
