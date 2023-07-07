@@ -13,7 +13,7 @@ Clean up code, move to more components
 Vue.js + Vite 
 https://vitejs.dev/guide/
 
-Deployed on github pages  
+Deployed on github pages 
 https://www.youtube.com/watch?v=yo2bMGnIKE8
 
 Data was ripped from here with python: https://www.goatformat.com/indivrulings.html
