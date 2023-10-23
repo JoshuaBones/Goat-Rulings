@@ -2,9 +2,12 @@
 import RulingComp from './components/Ruling.vue'
 
 import { onMounted, ref, watch } from 'vue'
-import cardData from './rulings.json'
+import goatData from './rulings.json'
+import edisonData from './edison_rulings.json'
 
-const cardNames = Object.keys(cardData)
+const format = ref("edison")
+
+const cardNames = Object.keys(cards())
 
 const searchInputElement = ref(null)
 const chkAutoSearch = ref(null)
@@ -24,10 +27,14 @@ function populateRuling(cardName) {
   if(chkSearchType.value == "Ruling Mentions") {
     //means they're looking for a specific card or text being mentioned, so highlight it
     const re = new RegExp(search.value, "gi")
-    ruling.value = cardData[cardName].replaceAll(re, '<mark>$&</mark>')
+    ruling.value = cards()[cardName].replaceAll(re, '<mark>$&</mark>')
   } else {
-    ruling.value = cardData[cardName]
+    ruling.value = cards()[cardName]
   }
+}
+
+function cards() {
+  return format == "goat" ? goatData : edisonData
 }
 
 async function findMentions() {
@@ -44,7 +51,7 @@ async function fetchMatchingData() {
   if(chkSearchType.value == "Card") { //search matching card names
     searchResults.value = cardNames.filter(x => x.toLowerCase().includes(s))
   } else {                            //retrieve cards based on stored rulings
-    searchResults.value = cardNames.filter((key) => cardData[key].toLowerCase().includes(s))
+    searchResults.value = cardNames.filter((key) => cards()[key].toLowerCase().includes(s))
   }
 }
 
@@ -77,6 +84,16 @@ onMounted(() => {
   <main>
     
     <div id="search" class="center">
+      <!--div>
+        <h2>YGO Rulings</h2>
+      </div-->
+      <div>
+        <label for="formats">Format: </label>
+        <select name="format" id="formats" :value="format">
+          <option value="goat">Goat</option>
+          <option value="edison">Edison</option>
+        </select>
+      </div>
       <div class="margins">
         <input type="checkbox" ref="chkAutoSearch" id="chkAutoSearch" checked>
         <label for="chkAutoSearch">Auto</label>
