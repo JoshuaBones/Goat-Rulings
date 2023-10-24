@@ -18,7 +18,7 @@ https://www.youtube.com/watch?v=yo2bMGnIKE8
 
 Data was ripped from here with python: https://www.goatformat.com/indivrulings.html
 
-From a YouTube comment
+From a YouTube comment:
 ```
 To recommit new changes and push up to the remote repository:
 
