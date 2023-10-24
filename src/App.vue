@@ -5,8 +5,11 @@ import { onMounted, ref, watch } from 'vue'
 import goatData from './rulings.json'
 import edisonData from './edison_rulings.json'
 
-const format = ref("edison")
 
+const chkFormat = ref("Edison")//search within Goat or Edison data
+
+const goatNames = Object.keys(goatData)
+const edisonNames = Object.keys(edisonData)
 const cardNames = Object.keys(cards())
 
 const searchInputElement = ref(null)
@@ -33,8 +36,14 @@ function populateRuling(cardName) {
   }
 }
 
+//retrieves card names based on which format is selected
+function cardKeys() {
+  return chkFormat.value == "Goat" ? goatNames : edisonNames
+}
+
+//retrieves card data based on which format is selected
 function cards() {
-  return format == "goat" ? goatData : edisonData
+  return chkFormat.value == "Goat" ? goatData : edisonData
 }
 
 async function findMentions() {
@@ -47,11 +56,11 @@ async function findMentions() {
 
 async function fetchMatchingData() {
   const s = search.value.toLowerCase()
-
+  
   if(chkSearchType.value == "Card") { //search matching card names
-    searchResults.value = cardNames.filter(x => x.toLowerCase().includes(s))
+    searchResults.value = cardKeys().filter(x => x.toLowerCase().includes(s))
   } else {                            //retrieve cards based on stored rulings
-    searchResults.value = cardNames.filter((key) => cards()[key].toLowerCase().includes(s))
+    searchResults.value = cardKeys().filter((key) => cards()[key].toLowerCase().includes(s))
   }
 }
 
@@ -74,6 +83,13 @@ watch([search, chkSearchType], async () => {
   }
 })
 
+//format change - refresh results
+watch([chkFormat], async () => {
+  //if(search.value != "") {
+    fetchMatchingData()
+  //}
+})
+
 onMounted(() => {
   //https://michaelnthiessen.com/set-focus-on-input-vue#:~:text=Set%20focus%20on%20page%20load
   searchInputElement.value.focus()
@@ -87,12 +103,18 @@ onMounted(() => {
       <!--div>
         <h2>YGO Rulings</h2>
       </div-->
-      <div>
+      <div class="margins">
         <label for="formats">Format: </label>
-        <select name="format" id="formats" :value="format">
-          <option value="goat">Goat</option>
-          <option value="edison">Edison</option>
-        </select>
+        <input v-model="chkFormat" type="radio" 
+               id="rGoat" 
+               value="Goat" 
+               class="l-margin">
+        <label for="rGoat">Goat</label>
+        <input v-model="chkFormat" type="radio"
+               id="rEdison" 
+               value="Ruling Mentions"
+               checked>
+        <label for="rEdison">Edison</label>
       </div>
       <div class="margins">
         <input type="checkbox" ref="chkAutoSearch" id="chkAutoSearch" checked>
@@ -123,7 +145,8 @@ onMounted(() => {
     <div v-if="namesOrRulings" class="text-center-outer">
       <div class="text-center-inner">
         <li v-for="(item, index) in searchResults" 
-          @click="populateRuling(item); toggleNamesOrRulings();">
+          @click="populateRuling(item); toggleNamesOrRulings();"
+          class="pointer">
           {{ item }}
         </li>
       </div>

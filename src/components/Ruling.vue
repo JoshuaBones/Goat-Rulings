@@ -3,6 +3,7 @@ const props = defineProps({
   msg: String,
   name: String
 })
+defineEmits(['goBack', 'findMentions'])
 </script>
 
 <template>
