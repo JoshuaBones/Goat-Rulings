@@ -17,7 +17,6 @@ Deployed on github pages
 https://www.youtube.com/watch?v=yo2bMGnIKE8
 
 Data was ripped these two links with python: 
-
 https://www.goatformat.com/indivrulings.html 
 https://www.edisonformat.com/rulings
 
