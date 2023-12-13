@@ -1,6 +1,6 @@
 # Goat-Rulings
 
-This site is meant to streamline the process of looking up a ruling for Yu-Gi-Oh!'s Goat format. Try finding the rulings for "Thousand-Eyes Restrict" here: https://www.goatformat.com/indivrulings.html.  
+This site is meant to streamline the process of looking up a ruling for Yu-Gi-Oh!'s Goat and Edison formats. Find the rulings for "Thousand-Eyes Restrict" here: https://www.goatformat.com/indivrulings.html.  
 Come back and try the same thing: https://joshuabones.github.io/Goat-Rulings/
 
 ## Planned features
@@ -16,7 +16,7 @@ https://vitejs.dev/guide/
 Deployed on github pages 
 https://www.youtube.com/watch?v=yo2bMGnIKE8
 
-Data was ripped these two links with python: https://www.goatformat.com/indivrulings.html 
+Data was ripped from these two links with python: https://www.goatformat.com/indivrulings.html 
 https://www.edisonformat.com/rulings
 
 From a YouTube comment:
