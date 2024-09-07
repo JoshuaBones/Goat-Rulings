@@ -99,11 +99,12 @@ onMounted(() => {
 <template>
   <main>
     
-    <div id="search" class="center">
+    <div id="search" class="center search-container">
       <!--div>
         <h2>YGO Rulings</h2>
       </div-->
       <div class="margins">
+        <!--div><button>Useful Links</button></div>-->
         <label for="formats">Format: </label>
         <input v-model="chkFormat" type="radio" 
                id="rGoat" 
@@ -146,7 +147,7 @@ onMounted(() => {
       <div class="text-center-inner">
         <li v-for="(item, index) in searchResults" 
           @click="populateRuling(item); toggleNamesOrRulings();"
-          class="pointer">
+          class="text-formatting-limit">
           {{ item }}
         </li>
       </div>
