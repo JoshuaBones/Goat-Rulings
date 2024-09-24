@@ -19,7 +19,7 @@ print('starting')
 rulings = {}
 for link in links:
     print('retrieving data: ' + link)
-    html_text = requests.get(link).text.replace('<br/>', '').replace('<br>', '').replace('<em>', '').replace('</em>', '').replace('<span>THUNDER DRAGON</span>', 'THUNDER DRAGON')#these mess up soup iteration in the while loop, plus some other(s)
+    html_text = requests.get(link).text.replace('<br/>', '').replace('<br>', '').replace('<em>', '').replace('</em>', '').replace('<span>THUNDER DRAGON</span>', 'THUNDER DRAGON').replace('<span><strong>KYCOO THE GHOST DESTROYER</strong>', '<strong>KYCOO THE GHOST DESTROYER</strong><span>')#these mess up soup iteration in the while loop, plus some other(s)
 
     soup = BeautifulSoup(html_text, 'html.parser')
 
