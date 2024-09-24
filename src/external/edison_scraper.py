@@ -24,7 +24,8 @@ print('starting')
 rulings = {}
 for link in links:
     print('retrieving data: ' + link)
-    html_text = requests.get(link).text
+    #little crazy with the format fixes. Done with sublime text ctrl+shift+L after searching < in card names on the site, but sadly it removes any formatting on the site for some reason
+    html_text = requests.get(link).text#.replace('<strong>CHARM OF SHABTI</strong>', 'CHARM OF SHABTI').replace('<span><span>D - FORMATION</span> </span>', 'D - FORMATION').replace('<span><span>D - TIME</span> </span>', 'D - TIME').replace('<span><span>D. D. CRAZY BEAST</span> </span>', 'D. D. CRAZY BEAST').replace('<span><span>D. D. DESIGNATOR</span> </span>', 'D. D. DESIGNATOR').replace('<span><span>D. D. DYNAMITE</span> </span>', 'D. D. DYNAMITE')
     soup = BeautifulSoup(html_text, 'html.parser')
 
     #curr_rulings = soup.find_all("div", {"class": "paragraph"})[0]
@@ -35,7 +36,7 @@ for link in links:
     ruling_elements = curr_rulings#.next_element
 
     currKey = ''
-    while ruling_elements != None:     
+    while ruling_elements != None:  
 
         if ruling_elements.name == 'strong':
             currKey = str(ruling_elements.next)

@@ -19,8 +19,10 @@ print('starting')
 rulings = {}
 for link in links:
     print('retrieving data: ' + link)
-    html_text = requests.get(link).text
+    html_text = requests.get(link).text.replace('<br/>', '').replace('<br>', '').replace('<em>', '').replace('</em>', '').replace('<span>THUNDER DRAGON</span>', 'THUNDER DRAGON')#these mess up soup iteration in the while loop, plus some other(s)
+
     soup = BeautifulSoup(html_text, 'html.parser')
+
 
     curr_rulings = soup.find_all("div", {"class": "paragraph"})[0]
 
@@ -39,7 +41,7 @@ for link in links:
 
         ruling_elements = ruling_elements.next_sibling
 print('finished retrieving\nwriting to file')
-    
+
 with open("./src/rulings.json", "w") as outfile:
     json.dump(rulings, outfile)
 print('finished successfully')
