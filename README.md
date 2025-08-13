@@ -9,7 +9,8 @@ This site is meant to streamline the process of looking up a ruling for Yu-Gi-Oh
 Vue.js + Vite
 https://vitejs.dev/guide/
 
-Deployed on github pages [here](https://vite.dev/guide/static-deploy.html#github-pages)
+Deployed on github pages
+https://vite.dev/guide/static-deploy.html#github-pages
 
 Data was ripped from these two links with python:
 * https://www.goatformat.com/indivrulings.html 
